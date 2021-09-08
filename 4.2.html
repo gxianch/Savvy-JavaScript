@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    var object={
+        isA:function(aType){
+            var self=this;
+            while(self){
+                if(self==aType){
+                    return true;
+                }else{
+                    self=self.Type;
+                }
+            };
+            return false;
+        }
+    };
+    function Class(aBaseClass,aClassDefine){
+        function class_(){
+            this.Type=aBaseClass;
+            for(var member in aClassDefine){
+                this[member]=aClassDefine[member];
+            }
+        };
+        class_.prototype=aBaseClass;
+        return new class_();
+    };
+    function New(aClass,aParams){
+        function new_(){
+            this.Type=aClass;
+            if(aClass.Create){
+                aClass.Create.apply(this,aParams);
+            }
+        };
+        new_.prototype=aClass;
+        return new new_();
+    };
+
+    var Person=Class(object,{//派生object基本类
+        Create:function(name,age){
+            this.name=name;
+            this.age=age;
+        }
+        ,SayHello:function(){
+            console.log("Hello,I'm "+this.name+" , "+this.age+" years old.");
+        }
+    });
+    var Employee=Class(Person,{
+        Create:function(name,age,salay){
+            Person.Create.call(this,name,age);//调用基类的构造函数
+            this.salay=salay;
+        }
+        ,ShowMeTheMoney:function(){
+            console.log(this.name+" $ "+this.salay);
+        }
+    });
+    var BillGates=New(Person,["Bill Gates",53]);
+    var SteveJobs=New(Employee,["Steve Jobs",53,1234]);
+    BillGates.SayHello();
+    SteveJobs.SayHello();
+    SteveJobs.ShowMeTheMoney();
+    var Little=New(BillGates.Type,["Little",6]);
+    Little.SayHello();
+    console.log(BillGates.isA(Person));
+    console.log(BillGates.isA(Employee));
+    console.log(SteveJobs.isA(Person));
+    console.log(Person.isA(Employee));
+    console.log(Employee.isA(Person));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

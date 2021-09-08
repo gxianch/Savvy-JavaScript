@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>有无var的区别</title>
+    <script type="text/javascript">
+    var yourName="王菲";
+    myName="fzw";
+    alert(myName+" like "+yourName);//fzw like 王菲
+    ChangeNames();
+    function ChangeNames(){
+        alert('Your old name is '+yourName);//undefined
+        alert('My old name is '+myName);//fzw
+        var yourName="张三";
+        myName="李四";
+        alert(myName+" like "+yourName);//李四 like 张三
+    };
+    alert(myName+" like "+yourName);//李四 like 王菲
+    </script>
+</head>
+<body>
+
+</body>
+</html>

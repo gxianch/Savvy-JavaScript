@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    function New(aClass,aParams){//通用创建函数
+        function new_(){//定义临时的中转函数壳
+            aClass.Create.apply(this.aParams);//调用原型中定义的构造函数
+        };
+        new_.prototype=aClass;//准备中转原型对象
+        return new new_();
+    };
+    var Person={
+        Create:function(name,age){//这个当构造函数
+            this.name=name;
+            this.age=age;
+        }
+        ,SayHello:function(){//定义方法
+            console.log("Hello I'm "+this.name);
+        }
+        ,HowOld:function(){//定义方法
+            console.log(this.name+" is "+this.age+" years old.");
+        }
+    };
+    var BillGates=New(Person,["Bill Gates",53]);
+    BillGates.SayHello();
+    BillGates.HowOld();
+    console.log(BillGates.constructor==Object);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

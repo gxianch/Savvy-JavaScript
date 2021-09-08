@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    function Person(name){
+        this.name=name;
+    };
+    Person.prototype.company="Microsoft";//原型的属性
+    Person.prototype.SayHello=function(){
+        console.log("Hello I'm "+this.name+" of "+this.company);
+    };
+    var BillGates=new Person("Bill Gates");
+    BillGates.SayHello();
+    var SteveJobs=new Person("Steve Jobs");
+    SteveJobs.company="Apple";
+    SteveJobs.SayHello=function(){
+        console.log("Hi,"+this.name+" like "+this.company+".ha ha");
+    };
+    SteveJobs.SayHello();
+    BillGates.SayHello();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

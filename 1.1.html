@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title></title>
+    <script type="text/javascript">
+    var life={};
+    for(life.age=1;life.age<=3;life.age++){
+        switch(life.age){
+            case 1:
+                life.body="卵细胞";
+                life.say=function(){
+                    alert(this.age+this.body);
+                }
+                break;
+            case 2:
+                life.fail="尾巴";
+                life.gill="腮";
+                life.body="蝌蚪";
+                life.say=function(){
+                    alert(this.age+this.body+"-"+this.fail+this.gill);
+                };
+                break;
+            case 3:
+                delete life.fail;//删除fail
+                delete life.gill;
+                life.legs="四条腿";
+                life.lung="肺";
+                life.body="青蛙";
+                life.say=function(){
+                    alert(this.age+this.body+"-"+this.legs+"."+this.lung);
+                };
+                break;
+        }
+        life.say();//调用方法，此方法逻辑每次都会动态改变
+    }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>this</title>
+    <script type="text/javascript">
+    function WhoAml(){
+        alert("I'm "+this.name+" of "+typeof(this));
+    };
+    WhoAml();//此时this是根对象window，其name属性为空字符串，输出I'm of object
+    var BillGates={name:"Bill Gates"};
+    BillGates.WhoAml=WhoAml;//将函数WhoAml作为BillGates的方法
+    BillGates.WhoAml();//I'm Bill Gates of object.
+
+    var SteveJobs={name:"Steve Jobs"};
+    SteveJobs.WhoAml=WhoAml;
+    SteveJobs.WhoAml();//I'm Steve Jobs of object.
+
+    WhoAml.call(BillGates);//直接将BillGates作为this，调用WhoAml I'm Bill Gates of object.
+    WhoAml.call(SteveJobs);//I'm Steve Jobs of object.
+    BillGates.WhoAml.call(SteveJobs);//将SteveJobs作为this，却调用BillGates的方法 I'm Steve Jobs of object.
+    SteveJobs.WhoAml.call(BillGates);// I'm Bill Gates of object.
+    WhoAml.WhoAml=WhoAml;//将WhoAml函数设置为自身的方法。
+    WhoAml.name="WhoAml";
+    WhoAml.WhoAml();//此时的this是WhoAml自身 I'm WhoAml of object.
+
+    ({name:"nobody",WhoAml:WhoAml}).WhoAml(); //创建一个匿名对象，并调用这个方法I'm nobody of object.
+    </script>
+</head>
+<body>
+
+</body>
+</html>
